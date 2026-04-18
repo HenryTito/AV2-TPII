@@ -20,5 +20,13 @@ export default class Documento {
     public get DataExpedicao(){
         return this.dataExpedicao
     }
+
+    public set Numero(numero: string) {
+    this.numero = numero;
+    }
+
+    public set DataExpedicao(data: Date) {
+    this.dataExpedicao = data;
+    }
     
 }

@@ -2,6 +2,7 @@ import Impressor from "../interfaces/impressor";
 import Cliente from "../modelos/cliente";
 import ImpressorDocumentos from "./impressorDocumentos";
 import ImpressorEndereco from "./impressorEndereco";
+import ImpressorTelefones from "./impressorTelefones";
 
 export default class ImpressaorCliente implements Impressor {
     private cliente: Cliente
@@ -13,6 +14,7 @@ export default class ImpressaorCliente implements Impressor {
     }
     imprimir(): string {
         let impressao = `****************************\n`
+            + `| ID: ${this.cliente.Id}\n`
             + `| Nome: ${this.cliente.Nome}\n`
             + `| Nome social: ${this.cliente.NomeSocial}\n`
             + `| Data de nascimento: ${this.cliente.DataNascimento.toLocaleDateString()}\n`
@@ -20,6 +22,11 @@ export default class ImpressaorCliente implements Impressor {
 
         this.impressor = new ImpressorEndereco(this.cliente.Endereco)
         impressao = impressao + `\n${this.impressor.imprimir()}`
+
+        if (this.cliente.Telefones.length > 0) {
+            this.impressor = new ImpressorTelefones(this.cliente.Telefones)
+            impressao = impressao + `\n${this.impressor.imprimir()}`
+        }
 
         this.impressor = new ImpressorDocumentos(this.cliente.Documentos)
         impressao = impressao + `\n${this.impressor.imprimir()}`

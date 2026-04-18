@@ -10,5 +10,14 @@ export default class Armazem {
     public get Clientes() {
         return this.clientes
     }
+    public buscarClientePorId(id: number): Cliente | undefined {
+    for (let c of this.clientes) {
+        if (c.Id === id) return c;
+
+        let dep = c.Dependentes.find(d => d.Id === id);
+        if (dep) return dep;
+    }
+    return undefined;
+}
 
 }

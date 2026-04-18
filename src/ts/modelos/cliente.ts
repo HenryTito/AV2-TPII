@@ -3,6 +3,8 @@ import Endereco from "./endereco"
 import Telefone from "./telefone"
 
 export default class Cliente {
+    private id: number
+    private static contador: number = 1
     private nome: string
     private nomeSocial: string
     private dataNascimento: Date
@@ -14,6 +16,7 @@ export default class Cliente {
     private titular!: Cliente
 
     constructor(nome: string, nomeSocial: string, dataNascimento: Date) {
+        this.id = Cliente.contador++
         this.nome = nome
         this.nomeSocial = nomeSocial
         this.dataNascimento = dataNascimento
@@ -31,4 +34,35 @@ export default class Cliente {
     public get Titular() { return this.titular }
 
     public set Endereco(endereco: Endereco) { this.endereco = endereco }
+
+
+    public adicionarDependente(dependente: Cliente):void {
+        dependente.titular = this
+        this.dependentes.push(dependente)
+    }
+
+    public removerDependente(nome:string):void{
+        this.dependentes = this.dependentes.filter(d => d.Nome !== nome)
+    }
+
+    public adicionarTelefone(telefone: Telefone): void {
+    this.telefones.push(telefone)
+    }
+
+    public set Titular(titular: Cliente) {
+    this.titular = titular;
+    }
+
+    public set Nome(nome: string) {
+    this.nome = nome;
 }
+
+    public set NomeSocial(nomeSocial: string) {
+    this.nomeSocial = nomeSocial;
+    }
+
+    public get Id() {
+        return this.id
+    }
+
+    }

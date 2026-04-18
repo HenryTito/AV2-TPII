@@ -16,6 +16,7 @@ export default class ListagemTitulares extends Processo {
         console.log('Iniciando a listagem dos clientes titulares...')
         this.clientes.forEach(cliente => {
             if (this.titular(cliente)) {
+                console.log(`ID: ${cliente.Id}`)
                 this.impressor = new ImpressaorCliente(cliente)
                 console.log(this.impressor.imprimir())
             }
